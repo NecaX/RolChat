@@ -4,17 +4,17 @@
  *  prior written authorization from Sandip Salunke
  */
 
-var app = require('express')();
-var http = require('http').Server(app);
-var io = require('socket.io')(http);
+var appl = require('express')();
+var app = require('app').Server(appl);
+var io = require('socket.io')(app);
 var path = require('path');
 
 var onlineUsers = [];
 
-// Initialize appication with route / (that means root of the application)
-app.get('/', function(req, res){
+// Initialize application with route / (that means root of the appllication)
+appl.get('/', function(req, res){
   var express=require('express');
-  app.use(express.static(path.join(__dirname)));
+  appl.use(express.static(path.join(__dirname)));
   res.sendFile(path.join(__dirname, '../RolChat', 'index.html'));
 });
 
@@ -56,7 +56,6 @@ let port = process.env.PORT;
 if (port == null || port == "") {
   port = 3000;
 }
-app.listen(port);
-http.listen(port, function(){
+app.listen(port, function(){
   console.log('listening on *:3000');
 });
